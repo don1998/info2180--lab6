@@ -1,0 +1,25 @@
+<DOCTYPE! HTML>
+<html>
+    <head><script language="JavaScript"  src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script></head>
+<input type="button" value="Click Me" id="1">
+</html>
+
+<script type="text/javascript">
+     document.getElementById("1").addEventListener("click", function()
+    {
+        $(function()
+        {
+            $.ajax({
+                url:"https://info2180--lab6-doneil.c9users.io/request.php?q=definition",
+                method:"GET",
+            }).done(function(result){
+                window.alert(result);
+            });
+
+        });
+    });
+    
+        function Success(){
+        window.alert
+        }
+</script>
