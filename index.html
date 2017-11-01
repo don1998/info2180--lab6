@@ -4,7 +4,8 @@
 <h1>Web Dictionary</h1>
 <form>
 <input type="text" id="word">
-<input type="button" value="Look-up!" id="1"><br>
+<input type="button" value="Search" id="1">
+<input type="button" value="Get All Definitions" id="all"><br>
 <h2>Result</h2>
 <div id="result">
 </div>
@@ -28,7 +29,33 @@
         });
     });
     
-        function Success(){
-        window.alert
-        }
+     document.getElementById("all").addEventListener("click", function()
+    {
+        var list=[];
+        $(function()
+        {
+            $.ajax({
+                url:"https://info2180--lab6-doneil.c9users.io/request.php?q=&all=true",
+                method:"GET",
+                dataType:"xml",
+            }).done(function(result){
+                var entries = result.getElementsByTagName("entry");
+                for (var i = 0; i < entries.length; i++) {
+                    var word=entries[i].childNodes[1].innerHTML;
+                    var auth=entries[i].childNodes[3].innerHTML;
+                    var def=entries[i].childNodes[5].innerHTML;
+                    var ordered_list = document.createElement("ol");//Makes the ordered list
+                    var info = document.createElement("h3");//Header for the word being defined.
+                    var area = document.createElement("p");//Paragraph for the definitions of the word.
+                    var list_ele = document.createElement("li");//List element for each definition
+                
+                    list="<li> <h3>"+word+"</h3>"+"<p>"+def+"</p> <p> -"+auth+"</p></li>"+list;  
+                    document.getElementById("result").innerHTML = "<ol> "+ list +"</ol>";
+                }
+                console.log(auth,def,word);
+                //document.getElementById("result").innerHTML=entry;
+            });
+
+        });
+    });
 </script>
